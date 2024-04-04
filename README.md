@@ -1,9 +1,11 @@
+# PUC-project
+
 This is the main repository of PUC detection project
 
 Note that this repo only contains front end and backend of project... In order to access detection model, clone this repo locally
 [Detection model](https://github.com/vinayrewatkar/Detection-model)
 
-Commands:
+## Commands:
 
 **Running NodeJs server**
 
