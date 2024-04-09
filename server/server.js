@@ -2,8 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const authRouter = require("./router/auth-router");
+const authRouter = require("./router/router");
 const connectdb = require("./utils/db");
+const fileupload = require("express-fileupload");
 
 
 const corsOption = {
@@ -12,10 +13,13 @@ const corsOption = {
     Credentials:true,
 };
 
+app.use(fileupload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}));
 app.use(cors(corsOption));
 app.use(express.json());
 app.use("/api/auth", authRouter);
-
 
 const PORT = 5000;
 connectdb().then(() =>{

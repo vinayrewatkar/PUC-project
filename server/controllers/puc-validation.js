@@ -1,4 +1,5 @@
 const axios = require('axios');
+require("dotenv").config();
 
 exports.validatePUC = async (req, res) => {
     try {
@@ -15,7 +16,7 @@ exports.validatePUC = async (req, res) => {
             url: 'https://rto-vehicle-information-verification-india.p.rapidapi.com/api/v1/rc/vehicleinfo',
             headers: {
               'content-type': 'application/json',
-              'X-RapidAPI-Key': '139c90d5bdmsh887cd3b63935516p1969a0jsn785beb400347',
+              'X-RapidAPI-Key': '10e9c846ecmshd749ecfc37dd811p1a5c32jsn0722a13a0338',
               'X-RapidAPI-Host': 'rto-vehicle-information-verification-india.p.rapidapi.com'
             },
             data: {
