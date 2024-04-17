@@ -18,7 +18,7 @@ export const AuthProvider = ({children}) =>{
 export const useAuth = () =>{
     const authContextValue = useContext(AuthContext);
     if(!authContextValue){
-        throw new Error("used outsidde of the provider");
+        throw new Error("used outside of the provider");
     }
     return authContextValue;
 };
