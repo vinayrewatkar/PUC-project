@@ -1,19 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const authcontroller = require("../controllers/auth-controller");
-const validation=require("../controllers/puc-validation");
 const signupSchema = require("../validators/auth-validator");
 const validate = require("../middlewares/validate-middleware");
-const ocr=require("../controllers/ocr-contoller-testing");
-const invokeModel = require("../controllers/invokeModel");
-
+const { searchProducts } = require('../controllers/amazonapi');
+const { searchFlipkartProducts } = require('../controllers/flipkart'); // Import the Flipkart controller
 
 router.route("/home").get(authcontroller.home);
-router.route("/register").post(validate(signupSchema),authcontroller.register);
+router.route("/register").post(validate(signupSchema), authcontroller.register);
 router.route("/login").post(authcontroller.login);
-router.route("/validate").post(validation.validatePUC);
-router.route("/ocr").post(ocr.OCR);
-router.route("/invokeModel").post(invokeModel);
-
+router.route("/products/search").post(searchProducts); // Amazon search endpoint
+router.route("/flipkart/search").post(searchFlipkartProducts); // Flipkart search endpoint
 
 module.exports = router;
