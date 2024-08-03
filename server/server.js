@@ -4,12 +4,11 @@ const app = express();
 const cors = require("cors");
 const authRouter = require("./router/router");
 const connectdb = require("./utils/db");
-const invokeModel = require("./controllers/invokeModel"); // Import the invokeModel function
 const multer = require('multer');
 const path = require('path');
 
 const corsOption = {
-  origin: "http://localhost:5173",
+  origin: "http://localhost:3000",
   methods: "GET,POST,DELETE,PUT,PATCH",
   credentials: true,
 };
@@ -17,22 +16,25 @@ const corsOption = {
 app.use(cors(corsOption));
 app.use(express.json());
 
-// Set up multer for handling file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'temp')); // Set the destination folder for uploaded files
+    cb(null, path.join(__dirname, 'temp')); 
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Generate a unique filename for the uploaded file
+    cb(null, `${Date.now()}-${file.originalname}`); 
   }
 });
 
 const upload = multer({ storage });
 
-// Route for handling file upload and invoking the model
-app.post('/invokeModel', upload.single('image'), invokeModel);
+// Change this line
+app.use("/api", authRouter);
 
-app.use("/api/auth", authRouter);
+// Add this for debugging
+app.use((req, res, next) => {
+  console.log(`Received request: ${req.method} ${req.url}`);
+  next();
+});
 
 const PORT = 5000;
 
